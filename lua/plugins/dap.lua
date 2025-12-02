@@ -18,13 +18,13 @@ return {
 						size = 50, -- Width of left sidebar
 						position = "left",
 					},
-					-- {
-					-- 	elements = {
-					-- 		{ id = "repl", size = 1.0 }, -- REPL only (no console to avoid confusion)
-					-- 	},
-					-- 	size = 10, -- Height of bottom tray
-					-- 	position = "bottom",
-					-- },
+					{
+						elements = {
+							{ id = "repl", size = 1.0 }, -- REPL only (no console to avoid confusion)
+						},
+						size = 10, -- Height of bottom tray
+						position = "bottom",
+					},
 				},
 				floating = {
 					max_height = nil, -- Will fit to content
@@ -78,6 +78,21 @@ return {
 
 		-- C# Configurations
 		dap.configurations.cs = {
+			{
+				type = "coreclr",
+				name = "Launch",
+				request = "launch",
+				program = function()
+					return vim.fn.input(
+						"Path to executable/dll: ",
+						vim.fn.getcwd() .. "/bin/Debug/net8.0/YourApp.dll",
+						"file"
+					)
+				end,
+				cwd = "${workspaceFolder}",
+				stopOnEntry = false,
+				console = "externalTerminal",
+			},
 			{
 				type = "coreclr",
 				name = "Attach to Process",

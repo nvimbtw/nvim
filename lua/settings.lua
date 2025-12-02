@@ -30,7 +30,9 @@ vim.opt.list = false
 vim.opt.listchars = { tab = ">> ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
-vim.opt.scrolloff = 15
--- vim.lsp.handlers['window/showMessage'] = function() end
--- vim.lsp.handlers['window/showMessageRequest'] = function() end
--- vim.lsp.handlers['window/logMessage'] = function() end
+vim.opt.scrolloff = 10
+
+-- Keymaps
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
+vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>x", "<cmd>x<cr>", { desc = "Save & Quit" })

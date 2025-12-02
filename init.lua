@@ -1,13 +1,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 0
+vim.g.netrw_liststyle = 0 -- Extra: Prevent any style-based triggers
+
 require("lazy_setup")
 require("settings")
 require("highlights")
-
-vim.defer_fn(function()
-	require("snacks").explorer()
-end, 0)
 
 vim.diagnostic.config({
 	virtual_text = true, -- Disable inline text to prevent overflow
@@ -33,4 +35,22 @@ vim.diagnostic.config({
 	},
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "cs", "vb" },
+	callback = function()
+		vim.lsp.enable("omnisharp")
+	end,
+})
+
+vim.api.nvim_create_autocmd("UIEnter", {
+	callback = function()
+		if vim.fn.argc() == 0 and vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
+			vim.api.nvim_buf_delete(0, { force = true })
+			require("snacks").dashboard()
+		end
+	end,
+	once = true,
+})
+
 vim.opt.shell = "nu"
+vim.lsp.inline_completion.enable(true)

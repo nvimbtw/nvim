@@ -38,14 +38,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
 vim.api.nvim_set_hl(0, "CursorNormal", { bg = "#89b4fa" })
 vim.api.nvim_set_hl(0, "CursorInsert", { bg = "#cdd6f4" })
 vim.api.nvim_set_hl(0, "CursorVisual", { bg = "#b4befe" })
@@ -63,9 +55,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		vim.api.nvim_set_hl(0, "CursorNormal", { bg = "#89b4fa" })
 		vim.api.nvim_set_hl(0, "CursorInsert", { bg = "#cdd6f4" })
-		vim.api.nvim_set_hl(0, "CursorVisual", { bg = "#b4befe" })
+		vim.api.nvim_set_hl(0, "CursorVisual", { bg = "#1e1e2e" })
 		vim.api.nvim_set_hl(0, "CursorCommand", { bg = "#94e2d5" })
 	end,
 })
 
-vim.api.nvim_set_hl(0, "Visual", { fg = "#1e1e2e", bg = "#b4befe" })
+vim.api.nvim_set_hl(0, "Visual", { fg = "#b4befe", bg = "#2d3040" })
