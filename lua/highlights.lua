@@ -45,7 +45,7 @@ vim.api.nvim_set_hl(0, "CursorCommand", { bg = "#94e2d5" })
 
 vim.opt.guicursor = {
 	"n:block-CursorNormal",
-	"i-ci:block-CursorInsert",
+	"i-ci:ver25-CursorInsert",
 	"v-V:block-CursorVisual",
 	"c:block-CursorCommand",
 }
@@ -60,4 +60,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
-vim.api.nvim_set_hl(0, "Visual", { fg = "#b4befe", bg = "#2d3040" })
+vim.api.nvim_set_hl(0, "Visual", { fg = "#b4befe", bg = "#36394d" })

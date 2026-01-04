@@ -8,8 +8,8 @@ require("tv").setup({
 		auto_open = true,
 	},
 	window = {
-		width = 0.9,
-		height = 0.9,
+		width = 0.95,
+		height = 0.95,
 		border = "none", -- none|single|double|rounded|solid|shadow
 		title = "   Television ",
 	},

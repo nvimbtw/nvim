@@ -36,3 +36,28 @@ vim.opt.scrolloff = 10
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>x", "<cmd>x<cr>", { desc = "Save & Quit" })
+vim.keymap.set("n", "<leader>sh", "<C-w>s") -- split horizontal
+vim.keymap.set("n", "<leader>sv", "<C-w>v") -- split vertical
+vim.keymap.set("n", "<leader>stv", "<cmd>vsplit<bar>TvFiles<CR>")
+vim.keymap.set("n", "<leader>so", "<C-w>o") -- only split
+vim.keymap.set("n", "<leader>gh", "<C-w>h") -- go to left split
+vim.keymap.set("n", "<leader>gj", "<C-w>j") -- go to bottom split
+vim.keymap.set("n", "<leader>gk", "<C-w>k") -- go to top split
+vim.keymap.set("n", "<leader>gl", "<C-w>l") -- go to right split
+
+vim.keymap.set("n", "<leader>t", function()
+	vim.cmd("botright vsplit")
+	vim.cmd("terminal")
+	vim.cmd("startinsert")
+end, { desc = "Open terminal in horizontal bottom split" })
+vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", { desc = "Escape terminal mode to normal mode" })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "term://*", -- Matches all terminal buffers
+	callback = function()
+		vim.opt_local.number = true -- Show absolute number on current line
+		vim.opt_local.relativenumber = true -- Show relative numbers on other lines
+		vim.opt_local.signcolumn = "no" -- Optional: Hide signcolumn in terminal (cleaner look)
+	end,
+	desc = "Enable relative line numbers in terminals",
+})

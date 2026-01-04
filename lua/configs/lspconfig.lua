@@ -28,6 +28,12 @@ vim.lsp.enable("emmet_language_server")
 
 vim.lsp.config("clangd", {
 	capabilities = capabilities,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--query-driver=/run/current-system/sw/bin/gcc", -- ← this is the magic line
+		"--query-driver=/run/current-system/sw/bin/clang", -- extra safety
+	},
 	on_attach = function(client, bufnr)
 		if client.name == "clangd" then
 			vim.api.nvim_create_autocmd("BufWritePre", {

@@ -10,6 +10,7 @@ vim.g.netrw_liststyle = 0 -- Extra: Prevent any style-based triggers
 require("lazy_setup")
 require("settings")
 require("highlights")
+require("dupes")
 
 vim.diagnostic.config({
 	virtual_text = true, -- Disable inline text to prevent overflow
