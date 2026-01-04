@@ -13,8 +13,15 @@ require("highlights")
 require("dupes")
 
 vim.diagnostic.config({
-	virtual_text = true, -- Disable inline text to prevent overflow
-	signs = true, -- Keep the sign column icons (E, W, etc.)
+	virtual_text = true, -- Disable inline text to prevent overflow in splits
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+		},
+	},
 	underline = true, -- Optional: Keep squiggly underlines under errors
 	update_in_insert = false, -- Avoid jittery updates while typing
 	severity_sort = true, -- Sort diagnostics by severity in floats

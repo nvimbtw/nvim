@@ -34,16 +34,6 @@ vim.lsp.config("clangd", {
 		"--query-driver=/run/current-system/sw/bin/gcc", -- ← this is the magic line
 		"--query-driver=/run/current-system/sw/bin/clang", -- extra safety
 	},
-	on_attach = function(client, bufnr)
-		if client.name == "clangd" then
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ async = false })
-				end,
-			})
-		end
-	end,
 })
 vim.lsp.enable("clangd")
 
@@ -58,13 +48,6 @@ vim.lsp.enable("zls", {
 	},
 })
 vim.lsp.enable("zls")
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.zig", "*.zon" },
-	callback = function(ev)
-		vim.lsp.buf.format()
-	end,
-})
 
 vim.lsp.config("nixd", {
 	capabilities = capabilities,
@@ -134,13 +117,6 @@ vim.lsp.config("omnisharp", {
 		if client.name == "omnisharp" then
 			-- Fix semantic tokens for theme compatibility
 			client.server_capabilities.semanticTokensProvider = nil
-			-- Your existing auto-format
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ async = false })
-				end,
-			})
 		end
 	end,
 	settings = {
