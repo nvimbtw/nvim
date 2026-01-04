@@ -52,6 +52,14 @@ vim.keymap.set("n", "<leader>t", function()
 end, { desc = "Open terminal in horizontal bottom split" })
 vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", { desc = "Escape terminal mode to normal mode" })
 
+vim.keymap.set("n", "<leader>tg", function()
+	vim.cmd("botright vsplit")
+	vim.cmd("terminal")
+	local chan = vim.b.terminal_job_id
+	vim.api.nvim_chan_send(chan, "gemini\n")
+	vim.cmd("startinsert")
+end, { desc = "Open terminal in horizontal bottom split and run a command" })
+
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "term://*", -- Matches all terminal buffers
 	callback = function()
