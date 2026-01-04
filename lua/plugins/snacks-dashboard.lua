@@ -44,6 +44,12 @@ return {
 						desc = "Mason",
 						action = ":Mason",
 					},
+					{
+						icon = "󰊢 ",
+						key = "v",
+						desc = "LazyGit",
+						action = ":LazyGit",
+					},
 					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
 				},
 
