@@ -37,7 +37,7 @@ vim.lsp.config("clangd", {
 })
 vim.lsp.enable("clangd")
 
-vim.lsp.enable("zls", {
+vim.lsp.config("zls", {
 	capabilities = capabilities,
 	settings = {
 		zls = {
@@ -70,7 +70,7 @@ vim.lsp.enable("nixd")
 vim.lsp.config("tinymist", {
 	settings = {
 		formatterMode = "typstyle",
-		exportPdf = "off",
+		exportPdf = "onSave",
 		semanticTokens = "disable",
 	},
 })
@@ -170,21 +170,6 @@ vim.lsp.enable("omnisharp")
 -- 		end
 -- 	end,
 -- })
-
-vim.lsp.config("sqls", {
-	capabilities = capabilities,
-	settings = {
-		sqls = {
-			connections = {
-				{
-					driver = "mysql",
-					dataSourceName = "root:tadyonnix@tcp(127.0.0.1:3306)/jadralec?tls=false",
-				},
-			},
-		},
-	},
-})
-vim.lsp.enable("sqls")
 
 vim.lsp.config("pyright", {
 	capabilities = capabilities,

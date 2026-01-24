@@ -1,9 +1,10 @@
-vim.keymap.set("n", "<leader>dd", "yyp", { desc = "Duplicate line below" })
-vim.keymap.set("n", "<leader>du", "yyP", { desc = "Duplicate line above" })
-vim.keymap.set("n", "<leader>dp", "yap}p", { desc = "Duplicate paragraph" })
-vim.keymap.set("n", "<leader>db", "y%P", { desc = "[D]uplicate inside block" })
-vim.keymap.set("n", "<leader>dt", "yyp0D", { desc = "[D]uplicate as template" })
-vim.keymap.set("n", "<leader>d<Space>", "yypA", { desc = "[D]uplicate & insert" })
+-- Yank/duplicate operations (moved from <leader>d to <leader>y to avoid conflict with DAP)
+vim.keymap.set("n", "<leader>yd", "yyp", { desc = "Yank duplicate line below" })
+vim.keymap.set("n", "<leader>yu", "yyP", { desc = "Yank duplicate line above" })
+vim.keymap.set("n", "<leader>yp", "yap}p", { desc = "Yank duplicate paragraph" })
+vim.keymap.set("n", "<leader>yb", "y%P", { desc = "Yank duplicate inside block" })
+vim.keymap.set("n", "<leader>yt", "yyp0D", { desc = "Yank duplicate as template" })
+vim.keymap.set("n", "<leader>y<Space>", "yypA", { desc = "Yank duplicate & insert" })
 
 -- Move selection
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })

@@ -1,6 +1,5 @@
 return {
 	"mfussenegger/nvim-dap",
-	lazy = false, -- Load early
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
@@ -50,22 +49,20 @@ return {
 			end
 		end,
 	},
+	keys = {
+		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+		{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+		{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+		{ "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
+		{ "<leader>du", function() require("dap").step_out() end, desc = "Step Out" },
+		{ "<leader>dr", function() require("dap").repl.open() end, desc = "Open REPL" },
+		{ "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+		{ "<leader>dt", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+	},
 	config = function()
 		local dap = require("dap")
 
-		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-		vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
-		vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step Into" })
-		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step Over" })
-		vim.keymap.set("n", "<leader>du", dap.step_out, { desc = "Step Out" })
-		vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Open REPL" })
-		vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run Last" })
-
 		dap.defaults.fallback.terminal_win_cmd = "belowright 10new | terminal"
-
-		vim.keymap.set("n", "<leader>dt", function()
-			require("dapui").toggle()
-		end, { desc = "Toggle DAP UI" })
 
 		dap.adapters.coreclr = {
 			type = "executable",

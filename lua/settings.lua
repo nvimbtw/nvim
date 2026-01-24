@@ -36,6 +36,8 @@ vim.opt.scrolloff = 10
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>x", "<cmd>x<cr>", { desc = "Save & Quit" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+vim.keymap.set("n", "<leader><tab>", "<C-^>", { desc = "Switch to last buffer" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s") -- split horizontal
 vim.keymap.set("n", "<leader>sv", "<C-w>v") -- split vertical
 vim.keymap.set("n", "<leader>stv", "<cmd>vsplit<bar>TvFiles<CR>")
@@ -44,6 +46,7 @@ vim.keymap.set("n", "<leader>gh", "<C-w>h") -- go to left split
 vim.keymap.set("n", "<leader>gj", "<C-w>j") -- go to bottom split
 vim.keymap.set("n", "<leader>gk", "<C-w>k") -- go to top split
 vim.keymap.set("n", "<leader>gl", "<C-w>l") -- go to right split
+vim.keymap.set("n", "<leader>sm", "<cmd>SupermavenToggle<cr>", { desc = "Toggle Supermaven" })
 
 vim.keymap.set("n", "<leader>t", function()
 	vim.cmd("botright vsplit")
@@ -69,3 +72,15 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 	desc = "Enable relative line numbers in terminals",
 })
+
+-- Toggle diagnostics
+local diagnostics_active = true
+vim.keymap.set("n", "<leader>td", function()
+	diagnostics_active = not diagnostics_active
+	if diagnostics_active then
+		vim.diagnostic.enable()
+	else
+		vim.diagnostic.enable(false)
+	end
+	vim.notify("Diagnostics " .. (diagnostics_active and "enabled" or "disabled"))
+end, { desc = "Toggle diagnostics" })

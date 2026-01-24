@@ -24,13 +24,13 @@ return {
 						icon = " ",
 						key = "f",
 						desc = "Search Files",
-						action = ":TvFiles",
+						action = ":Tv files",
 					},
 					{
 						icon = " ",
 						key = "g",
 						desc = "Search Text",
-						action = ":TvText",
+						action = ":Tv text",
 					},
 					{
 						icon = "󰒲 ",

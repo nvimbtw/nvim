@@ -8,8 +8,8 @@ return {
       function()
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
-      mode = '',
-      desc = '[F]ormat buffer',
+      mode = { 'n', 'v' },
+      desc = '[F]ormat buffer or selection',
     },
   },
   config = function()
