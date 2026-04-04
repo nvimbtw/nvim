@@ -1,52 +1,26 @@
-require("catppuccin").setup({
-	flavour = "mocha",
-	show_end_of_buffer = false,
-	no_italic = false,
-	no_bold = false,
-	no_underline = false,
-	styles = {
-		comments = { "italic" },
-		conditionals = { "bold", "italic" },
-		loops = { "bold", "italic" },
-		functions = { "bold", "italic" },
-		keywords = {},
-		strings = {},
-		variables = { "bold" },
-		numbers = {},
-		booleans = {},
-		properties = {},
-		types = { "bold" },
-		operators = {},
-	},
-	lsp_styles = {
-		virtual_text = {
-			errors = { "bold", "italic" },
-			hints = { "italic" },
-			warnings = { "bold", "italic" },
-			information = { "italic" },
-			ok = { "italic" },
-		},
-		underlines = {
-			errors = { "strikethrough" },
-			hints = { "underline" },
-			warnings = { "undercurl" },
-			information = { "underdouble" },
-			ok = { "underline" },
-		},
-		inlay_hints = {
-			background = true,
-		},
-	},
-	integrations = {
-		blink_cmp = {
-			enabled = true,
-			style = "solid",
-		},
-		snacks = {
-			enabled = true,
-			indent_scope_color = "lavender",
-		},
-	},
-})
+vim.opt.background = "dark"
+vim.cmd("colorscheme oxocarbon")
 
-vim.cmd("colorscheme catppuccin")
+-- Custom Highlights for Oxocarbon
+local colors = {
+	bg = "#161616",
+	bg_alt = "#262626",
+	cyan = "#3ddbd9",
+	purple = "#be95ff",
+	pink = "#ff7eb6",
+	red = "#ee5396",
+	green = "#42be65",
+	fg = "#f2f4f8",
+}
+
+-- Ensure consistent diagnostic and UI colors
+vim.api.nvim_set_hl(0, "DiagnosticError", { fg = colors.red })
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = colors.pink })
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = colors.cyan })
+vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = colors.purple })
+
+-- Floating Windows
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors.bg })
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = colors.cyan, bg = colors.bg })
+vim.api.nvim_set_hl(0, "DiagnosticNormal", { bg = colors.bg })
+vim.api.nvim_set_hl(0, "DiagnosticBorder", { fg = colors.cyan, bg = colors.bg })

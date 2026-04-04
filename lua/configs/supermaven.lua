@@ -6,7 +6,7 @@ return {
 	},
 	ignore_filetypes = { cpp = true },
 	color = {
-		suggestion_color = "#45475a",
+		suggestion_color = "#dde1e6",
 		cterm = 244,
 	},
 	log_level = "info",

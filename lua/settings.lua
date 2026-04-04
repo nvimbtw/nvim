@@ -73,6 +73,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	desc = "Enable relative line numbers in terminals",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "television",
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	end,
+})
+
 -- Toggle diagnostics
 local diagnostics_active = true
 vim.keymap.set("n", "<leader>td", function()

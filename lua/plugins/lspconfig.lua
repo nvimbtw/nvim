@@ -68,6 +68,35 @@ return {
 					})
 				end
 
+				-- Diagnostic float on hover
+				vim.api.nvim_create_autocmd("CursorHold", {
+					buffer = event.buf,
+					callback = function()
+						vim.diagnostic.open_float(nil, {
+							focusable = false,
+							close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
+							scope = "line",
+							source = "if_many",
+							header = " Diagnostics:",
+							border = "rounded",
+							winhighlight = "Normal:DiagnosticNormal,FloatBorder:DiagnosticBorder",
+							prefix = function(diagnostic, i, total)
+								local icon = " "
+								if diagnostic.severity == vim.diagnostic.severity.ERROR then
+									icon = "󰅚 "
+								elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+									icon = "󰀪 "
+								elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+									icon = "󰌶 "
+								elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+									icon = "󰋽 "
+								end
+								return i .. ". " .. icon
+							end,
+						})
+					end,
+				})
+
 				-- Inlay hints toggle
 				if
 					client

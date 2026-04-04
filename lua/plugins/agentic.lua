@@ -2,21 +2,50 @@ return {
 	"carlos-algms/agentic.nvim",
 
 	opts = {
-		-- Available by default: "claude-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp"
 		provider = "gemini-acp",
+
 		keymaps = {
 			prompt = {
 				paste_image = {
 					{
-						"<localleader>p",
-						mode = { "n" },
+						"<A-p>",
+						mode = { "n", "i" },
 					},
 				},
 			},
 		},
+
+		acp_providers = {
+			["gemini-acp"] = {
+				command = "gemini",
+				-- args = { "--model", "gemini-2.5-flash" },
+				-- env = {
+				-- 	GEMINI_API_KEY = "AIzaSyCE-IGa5fGdO_1pb4rgBVSe9XyD8s-SrXE"
+				-- }
+			}
+		},
+
+		headers = {
+			chat = {
+				title = "󱚡 Agentic",
+			},
+
+			files = {
+				title = " Files"
+			},
+
+			input = {
+				title = "󰭹 Message"
+			}
+		},
+
+		diff_preview = {
+			enabled = true,
+			layout = "inline",
+			center_on_navigate_hunks = true,
+		},
 	},
 
-	-- these are just suggested keymaps; customize as desired
 	keys = {
 		{
 			"<leader>aa",
@@ -41,6 +70,15 @@ return {
 			end,
 			mode = { "n", "v" },
 			desc = "New Agentic Session",
+		},
+		{
+			"<leader>ar", -- ai Restore
+			function()
+				require("agentic").restore_session()
+			end,
+			desc = "Agentic Restore session",
+			silent = true,
+			mode = { "n", "v" },
 		},
 	},
 }

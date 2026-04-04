@@ -1,5 +1,4 @@
-local capabilities = _G.lsp_capabilities
-local lspconfig = require("lspconfig")
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 vim.lsp.config("emmet_language_server", {
 	filetypes = { "css", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
@@ -37,6 +36,14 @@ vim.lsp.config("clangd", {
 })
 vim.lsp.enable("clangd")
 
+vim.lsp.config("qmlls", {
+	capabilities = capabilities,
+	cmd = { "/usr/lib/qt6/bin/qmlls" },
+	filetypes = { "qml", "qmljs" },
+	root_markers = { ".git", "qmldir", "CMakeLists.txt" },
+})
+vim.lsp.enable("qmlls")
+
 vim.lsp.config("zls", {
 	capabilities = capabilities,
 	settings = {
@@ -49,24 +56,6 @@ vim.lsp.config("zls", {
 })
 vim.lsp.enable("zls")
 
-vim.lsp.config("nixd", {
-	capabilities = capabilities,
-	settings = {
-		nixd = {
-			formatting = { command = "nixpkgs-fmt" },
-			options = {
-				enable = true,
-				target = { nixos = true },
-			},
-			diagnostics = {
-				enable = true,
-			},
-			semanticTokens = { enable = true },
-		},
-	},
-})
-vim.lsp.enable("nixd")
-
 vim.lsp.config("tinymist", {
 	settings = {
 		formatterMode = "typstyle",
@@ -75,39 +64,6 @@ vim.lsp.config("tinymist", {
 	},
 })
 vim.lsp.enable("tinymist")
-
--- vim.lsp.config("omnisharp", {
--- 	capabilities = capabilities,
--- 	filetypes = { "cs", "vb" },
--- 	root_markers = { "*.sln", "*.csproj", ".git" },
--- 	on_attach = function(client, bufnr)
--- 		if client.name == "omnisharp" then
--- 			vim.api.nvim_create_autocmd("BufWritePre", {
--- 				buffer = bufnr,
--- 				callback = function()
--- 					vim.lsp.buf.format({ async = false })
--- 				end,
--- 			})
--- 		end
--- 	end,
--- 	settings = {
--- 		FormattingOptions = {
--- 			EnableEditorConfigSupport = true,
--- 			InsertFinalNewLine = true,
--- 			OrganizeImports = true,
--- 			FormatOnType = true,
--- 		},
--- 		RoslynExtensionsOptions = {
--- 			EnableRoslynAnalyzers = true,
--- 			EnableEditorConfigSupport = true,
--- 			EnableImportCompletion = true,
--- 		},
--- 		Sdk = {
--- 			IncludePrereleases = true,
--- 		},
--- 	},
--- })
--- vim.lsp.enable("omnisharp")
 
 vim.lsp.config("omnisharp", {
 	capabilities = capabilities,
@@ -138,39 +94,6 @@ vim.lsp.config("omnisharp", {
 })
 vim.lsp.enable("omnisharp")
 
--- lspconfig.omnisharp.setup({
--- 	capabilities = capabilities,
--- 	cmd = { "OmniSharp" },
--- 	filetypes = { "cs", "vb" },
--- 	root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
--- 	settings = {
--- 		FormattingOptions = {
--- 			EnableEditorConfigSupport = true,
--- 			InsertFinalNewLine = true,
--- 			OrganizeImports = true,
--- 			FormatOnType = true,
--- 		},
--- 		RoslynExtensionsOptions = {
--- 			EnableRoslynAnalyzers = true,
--- 			EnableEditorConfigSupport = true,
--- 			EnableImportCompletion = true,
--- 		},
--- 		Sdk = {
--- 			IncludePrereleases = true,
--- 		},
--- 	},
--- 	on_attach = function(client, bufnr)
--- 		if client.name == "omnisharp" then
--- 			vim.api.nvim_create_autocmd("BufWritePre", {
--- 				buffer = bufnr,
--- 				callback = function()
--- 					vim.lsp.buf.format({ async = false })
--- 				end,
--- 			})
--- 		end
--- 	end,
--- })
-
 vim.lsp.config("pyright", {
 	capabilities = capabilities,
 })
@@ -191,24 +114,37 @@ vim.lsp.config("gopls", {
 vim.lsp.enable("gopls")
 
 vim.lsp.config("rust_analyzer", {
-	capabilities = capabilities,
+	capabilities = vim.tbl_deep_extend("force", capabilities, {
+		workspace = {
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+			},
+		},
+	}),
 	settings = {
 		["rust-analyzer"] = {
 			rustfmt = {
-				enablerangeformatting = true,
+				extraArgs = { "--config", "max_width=50" },
+				enableRangeFormatting = true,
+			},
+			check = {
+				command = "check",
+				allTargets = false,
 			},
 		},
 	},
 })
 vim.lsp.enable("rust_analyzer")
 
-vim.lsp.config("qmlls", {
-	capabilities = capabilities,
-})
-vim.lsp.enable("qmlls")
-
 vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { 'vim' }
+			}
+		}
+	}
 })
 vim.lsp.enable("lua_ls")
 

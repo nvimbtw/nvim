@@ -2,12 +2,10 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
-	init = function()
-		vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#89b4fa" })
-		vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "#b4befe" })
-		vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "#b4befe" })
-		vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = "#94e2d5", bold = true })
+	config = function(_, opts)
+		require("snacks").setup(opts)
 	end,
+	init = function() end,
 	---@type snacks.Config
 	opts = {
 		dashboard = {
@@ -20,55 +18,48 @@ return {
 
 			preset = {
 				keys = {
-					{
-						icon = " ",
-						key = "f",
-						desc = "Search Files",
-						action = ":Tv files",
-					},
-					{
-						icon = " ",
-						key = "g",
-						desc = "Search Text",
-						action = ":Tv text",
-					},
-					{
-						icon = "󰒲 ",
-						key = "l",
-						desc = "Lazy",
-						action = ":Lazy",
-					},
-					{
-						icon = "󰟾 ",
-						key = "m",
-						desc = "Mason",
-						action = ":Mason",
-					},
-					{
-						icon = "󰊢 ",
-						key = "v",
-						desc = "LazyGit",
-						action = ":LazyGit",
-					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					{ key = "f", desc = "Search Files", action = ":Tv files" },
+					{ key = "g", desc = "Search Text",  action = ":Tv text" },
+					{ key = "l", desc = "Lazy",         action = ":Lazy" },
+					{ key = "m", desc = "Mason",        action = ":Mason" },
+					{ key = "v", desc = "LazyGit",      action = ":LazyGit" },
+					{ key = "q", desc = "Quit",         action = ":qa" },
 				},
 
-				header = [[
-   ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
-   ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
-   ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
-   ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
-   ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
-   ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+				header = table.concat({
+					"███╗   ██╗██╗   ██╗██╗███╗   ███╗",
+					"████╗  ██║██║   ██║██║████╗ ████║",
+					"██╔██╗ ██║██║   ██║██║██╔████╔██║",
+					"██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+					"██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
+					"╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
+				}, "\n"),
+			},
 
-
-────────────────────────────────────────────────────────────
-]],
+			formats = {
+				key = function(item)
+					return {
+						{ "[",      hl = "SnacksDashboardKey" },
+						{ item.key, hl = "SnacksDashboardKey" },
+						{ "]  ",    hl = "SnacksDashboardKey" },
+					}
+				end,
 			},
 
 			sections = {
 				{ section = "header" },
-				{ section = "keys", gap = 1, padding = 1 },
+				{
+					text = {
+						{ "──────────────────────────────────────────────────────────", hl = "SnacksDashboardFooter" },
+					},
+				},
+				{
+					text = {
+						"",
+					},
+				},
+				{ section = "keys",   gap = 1, padding = 1 },
+				{ section = "startup" },
 			},
 		},
 

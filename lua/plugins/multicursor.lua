@@ -34,7 +34,7 @@ return {
 			mc.matchSkipCursor(-1)
 		end)
 
-		set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+		set({ "n", "x" }, "<leader>mc", mc.toggleCursor)
 
 		mc.addKeymapLayer(function(layerSet)
 			layerSet({ "n", "x" }, "<left>", mc.prevCursor)

@@ -1,6 +1,6 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"nyoom-engineering/oxocarbon.nvim",
+	name = "oxocarbon",
 	priority = 1000,
 	config = function()
 		require("configs.theme")
