@@ -65,13 +65,18 @@ vim.lsp.config("tinymist", {
 })
 vim.lsp.enable("tinymist")
 
+vim.lsp.config("wgsl-analyzer", {
+    cmd = { "wgsl-analyzer" },
+    filetypes = { "wgsl" },
+})
+vim.lsp.enable("wgsl-analyzer")
+
 vim.lsp.config("omnisharp", {
 	capabilities = capabilities,
 	filetypes = { "cs", "vb" },
 	root_markers = { "*.sln", "*.csproj", ".git" },
 	on_attach = function(client, bufnr)
 		if client.name == "omnisharp" then
-			-- Fix semantic tokens for theme compatibility
 			client.server_capabilities.semanticTokensProvider = nil
 		end
 	end,
