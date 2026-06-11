@@ -48,11 +48,11 @@ vim.keymap.set("n", "<leader>gk", "<C-w>k") -- go to top split
 vim.keymap.set("n", "<leader>gl", "<C-w>l") -- go to right split
 vim.keymap.set("n", "<leader>sm", "<cmd>SupermavenToggle<cr>", { desc = "Toggle Supermaven" })
 
-vim.keymap.set("n", "<leader>t", function()
-	vim.cmd("botright vsplit")
-	vim.cmd("terminal")
-	vim.cmd("startinsert")
-end, { desc = "Open terminal in horizontal bottom split" })
+-- vim.keymap.set("n", "<leader>t", function()
+-- 	vim.cmd("botright vsplit")
+-- 	vim.cmd("terminal")
+-- 	vim.cmd("startinsert")
+-- end, { desc = "Open terminal in horizontal bottom split" })
 vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", { desc = "Escape terminal mode to normal mode" })
 
 vim.keymap.set("n", "<leader>tg", function()
