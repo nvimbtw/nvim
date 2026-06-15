@@ -1,4 +1,7 @@
 return {
+	dir = vim.fn.isdirectory(vim.fn.expand("~/Programming/Personal/tw-todo")) == 1
+		and vim.fn.expand("~/Programming/Personal/tw-todo")
+		or nil,
 	"nvimbtw/tw-todo",
 	name = "tw-todo",
 	config = function()

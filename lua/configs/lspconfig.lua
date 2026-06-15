@@ -1,3 +1,5 @@
+-- TODO: Fix LSP configuration
+-- tw:   33757f7
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 vim.lsp.config("emmet_language_server", {
@@ -66,8 +68,8 @@ vim.lsp.config("tinymist", {
 vim.lsp.enable("tinymist")
 
 vim.lsp.config("wgsl-analyzer", {
-    cmd = { "wgsl-analyzer" },
-    filetypes = { "wgsl" },
+	cmd = { "wgsl-analyzer" },
+	filetypes = { "wgsl" },
 })
 vim.lsp.enable("wgsl-analyzer")
 
@@ -75,7 +77,7 @@ vim.lsp.config("omnisharp", {
 	capabilities = capabilities,
 	filetypes = { "cs", "vb" },
 	root_markers = { "*.sln", "*.csproj", ".git" },
-	on_attach = function(client, bufnr)
+	on_attach = function(client)
 		if client.name == "omnisharp" then
 			client.server_capabilities.semanticTokensProvider = nil
 		end

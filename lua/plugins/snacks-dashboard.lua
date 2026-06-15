@@ -26,39 +26,22 @@ return {
 					{ key = "q", desc = "Quit",         action = ":qa" },
 				},
 
-				header = table.concat({
-					"███╗   ██╗██╗   ██╗██╗███╗   ███╗",
-					"████╗  ██║██║   ██║██║████╗ ████║",
-					"██╔██╗ ██║██║   ██║██║██╔████╔██║",
-					"██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-					"██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
-					"╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
-				}, "\n"),
+				header = "N E O V I M",
 			},
 
 			formats = {
 				key = function(item)
 					return {
-						{ "[",      hl = "SnacksDashboardKey" },
 						{ item.key, hl = "SnacksDashboardKey" },
-						{ "]  ",    hl = "SnacksDashboardKey" },
+						{ "   ",    hl = "SnacksDashboardKey" },
 					}
 				end,
 			},
 
 			sections = {
-				{ section = "header" },
-				{
-					text = {
-						{ "──────────────────────────────────────────────────────────", hl = "SnacksDashboardFooter" },
-					},
-				},
-				{
-					text = {
-						"",
-					},
-				},
-				{ section = "keys",   gap = 1, padding = 1 },
+				{ section = "header", padding = 2 },
+				{ text = { { "───────────", hl = "SnacksDashboardFooter" } }, align = "center", padding = 2 },
+				{ section = "keys", gap = 1, padding = 2 },
 				{ section = "startup" },
 			},
 		},
@@ -69,7 +52,6 @@ return {
 		explorer = {
 			enabled = true,
 		},
-
 		bigfile = { enabled = false },
 		input = { enabled = false },
 		quickfile = { enabled = false },
