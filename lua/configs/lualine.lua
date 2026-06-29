@@ -54,6 +54,10 @@ local function clients_lsp()
 	return "󰒋 " .. table.concat(c, " ")
 end
 
+-- Neovim's native tabline is top-only and can't be relocated. Hide it and render
+-- tab pages in the bottom (global) statusline instead — see lualine_z below.
+vim.o.showtabline = 0
+
 require("lualine").setup({
 	options = {
 		theme = kanagawa,
@@ -67,7 +71,20 @@ require("lualine").setup({
 		lualine_c = { "diagnostics" },
 		lualine_x = { "diff" },
 		lualine_y = { clients_lsp },
-		lualine_z = { "filetype" },
+		lualine_z = {
+			"filetype",
+			{
+				"tabs",
+				mode = 2, -- name + index; set to 1 for numbers only
+				cond = function()
+					return #vim.api.nvim_list_tabpages() > 1
+				end,
+				tabs_color = {
+					active = { fg = colors.sand, bg = colors.base, gui = "bold" },
+					inactive = { fg = colors.muted, bg = colors.base },
+				},
+			},
+		},
 	},
 	inactive_sections = {
 		lualine_a = {},
