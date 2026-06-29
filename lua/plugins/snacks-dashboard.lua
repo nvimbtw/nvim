@@ -46,7 +46,18 @@ return {
 			},
 		},
 
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			sources = {
+				explorer = {
+					-- match herdr's sidebar_width = 26 (snacks default is 40)
+					layout = {
+						preset = "sidebar",
+						layout = { width = 26, min_width = 26 },
+					},
+				},
+			},
+		},
 		notifier = { enabled = true },
 		indent = { enabled = true },
 		explorer = {
