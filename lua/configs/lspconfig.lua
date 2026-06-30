@@ -99,7 +99,14 @@ vim.lsp.config("omnisharp", {
 		},
 	},
 })
-vim.lsp.enable("omnisharp")
+-- vim.lsp.enable("omnisharp")  -- disabled: replaced by roslyn.nvim (avoid two C# servers attaching)
+
+-- C# is now served by roslyn.nvim (seblyng/roslyn.nvim), the modern Roslyn LS that
+-- replaces OmniSharp. The plugin ships its own lsp/roslyn.lua and calls
+-- vim.lsp.enable("roslyn"), so we only extend it here with completion capabilities.
+vim.lsp.config("roslyn", {
+	capabilities = capabilities,
+})
 
 vim.lsp.config("pyright", {
 	capabilities = capabilities,

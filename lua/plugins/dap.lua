@@ -14,7 +14,7 @@ return {
 							{ id = "scopes", size = 0.75 }, -- Variables/scopes
 							{ id = "breakpoints", size = 0.25 }, -- Breakpoint list
 						},
-						size = 50, -- Width of left sidebar
+						size = 26, -- Width of left sidebar (matches snacks explorer)
 						position = "left",
 					},
 					{
